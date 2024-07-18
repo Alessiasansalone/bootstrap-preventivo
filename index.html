@@ -57,14 +57,75 @@
         <!-- Container -->
         <div class="container">
             <!-- Row -->
-            <div class="row my-4 mx-2">
+            <div class="row my-4">
                 <!-- 1st col -->
                 <div class="col-md-8">
 
                     <h1>Richiesta preventivo</h1>
 
-                    <p style="font-size: 20px;">Compila il form per richiedere un preventivo per i nostri servizi di sviluppo</p>
+                    <p style="font-size: 20px;">Compila il form per richiedere un preventivo per i nostri servizi di
+                        sviluppo</p>
 
+                    <!-- Form -->
+                    <form class="g-3">
+
+                        <div class="col-12 my-3">
+                            <label for="inputName" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="inputName">
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <label for="inputLastName" class="form-label">Cognome</label>
+                            <input type="text" class="form-control" id="inputLastName">
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <label for="inputEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" placeholder="email@adress.com">
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <label for="inputJob" class="form-label">Tipo di lavoro</label>
+                            <select id="inputJob" class="form-select">
+                                <option selected>Scegli un'opzione...</option>
+                                <option>Sviluppo backend</option>
+                                <option>Sviluppo frontend</option>
+                                <option>Analisi progettuale</option>
+                            </select>
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <div>
+                                <label for="floatingTextarea2" class="form-label">Raccontaci in breve di te e delle tue esperienze</label>
+
+                                <textarea class="form-control" id="floatingTextarea2"
+                                    style="height: 100px"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="col-12 my-3">
+                            <label for="inputCode" class="form-label">Codice promozionale (opzionale)</label>
+                            <input type="text" class="form-control" id="inputCode">
+                        </div>
+
+                        <div class="col-12 my-3">
+
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <label class="form-check-label" for="gridCheck">
+                                    Accetto la Privacy Policy
+                                </label>
+                            </div>
+
+                        </div>
+
+                        <div class="col-12 d-flex justify-content-evenly my-4">
+                            <button type="submit" class="btn btn-primary">Calcola preventivo</button>
+
+                            <p><strong>Prezzo finale</strong></p>
+                        </div>
+
+                    </form>
                 </div>
 
                 <!-- 2nd col -->
