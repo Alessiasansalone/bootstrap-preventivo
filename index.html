@@ -17,14 +17,14 @@
     <header class="bg-dark">
 
         <!-- Navbar -->
-        <nav class="navbar navbar-expand-lg">
+        <nav class="navbar navbar-expand-lg navbar-dark py-3">
 
             <!-- Container link -->
             <div class="container">
 
-                <a class="navbar-brand text-light" href="#">Bool Factory</a>
+                <a class="navbar-brand" href="#">Bool Factory</a>
 
-                <button class="navbar-toggler border-light navbar-dark" type="button" data-bs-toggle="collapse"
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -34,15 +34,15 @@
                     <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="nav-link active text-secondary" aria-current="page" href="#">Home</a>
+                            <a class="nav-link" aria-current="page" href="#">Home</a>
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link text-secondary" href="#">Servizi</a>
+                            <a class="nav-link" href="#">Servizi</a>
                         </li>
 
-                        <li class="nav-item dropdown">
-                            <a class="nav-link text-secondary" href="#">Contatti</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">Contatti</a>
                         </li>
 
                     </ul>
@@ -59,29 +59,32 @@
             <!-- Row -->
             <div class="row my-4">
                 <!-- 1st col -->
-                <div class="col-md-8">
+                <div class="col-md-9">
 
                     <h1>Richiesta preventivo</h1>
 
                     <p style="font-size: 20px;">Compila il form per richiedere un preventivo per i nostri servizi di
-                        sviluppo</p>
+                        sviluppo.</p>
 
                     <!-- Form -->
-                    <form class="g-3">
+                    <form class="g-3" id="preventive-form">
 
                         <div class="col-12 my-3">
-                            <label for="inputName" class="form-label">Nome</label>
-                            <input type="text" class="form-control" id="inputName">
+                            <label for="input-name" class="form-label">Nome</label>
+                            <input type="text" class="form-control" id="input-name">
+                            <div class="pt-2 text-danger" id="required-name"></div>
                         </div>
 
                         <div class="col-12 my-3">
-                            <label for="inputLastName" class="form-label">Cognome</label>
-                            <input type="text" class="form-control" id="inputLastName">
+                            <label for="input-last-name" class="form-label">Cognome</label>
+                            <input type="text" class="form-control" id="input-last-name">
+                            <div class="pt-2 text-danger" id="required-last-name"></div>
                         </div>
 
                         <div class="col-12 my-3">
-                            <label for="inputEmail" class="form-label">Email</label>
-                            <input type="email" class="form-control" id="inputEmail" placeholder="email@adress.com">
+                            <label for="input-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="input-email" placeholder="email@adress.com">
+                            <div class="pt-2 text-danger" id="required-email"></div>
                         </div>
 
                         <div class="col-12 my-3">
@@ -111,7 +114,7 @@
                         <div class="col-12 my-3">
 
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" id="gridCheck">
+                                <input class="form-check-input" type="checkbox" id="gridCheck" required>
                                 <label class="form-check-label" for="gridCheck">
                                     Accetto la Privacy Policy
                                 </label>
@@ -120,19 +123,20 @@
                         </div>
 
                         <div class="col-12 d-flex justify-content-evenly my-4">
-                            <button type="submit" class="btn btn-primary">Calcola preventivo</button>
+                            <button type="submit" class="btn btn-primary" id="button">Calcola preventivo</button>
 
                             <p><strong>Prezzo finale</strong></p>
+                            <p id="final-price"></p>
                         </div>
 
                     </form>
                 </div>
 
                 <!-- 2nd col -->
-                <div class="col-md-4">
-                    <div class="card" style="width: 18rem;">
+                <div class="col-md-3">
+                    <div class="card my-3">
 
-                        <img src="./img/Contacts_30028.webp" class="card-img-top " alt="...">
+                        <img src="./img/Contacts_30028.webp" class="card-img-top w-75 align-self-center" alt="..." style="height: 50%;">
 
                         <div class="card-body">
                             <h5 class="card-title">I nostri contatti</h5>
@@ -167,6 +171,7 @@
         crossorigin="anonymous"></script>
 
     <!-- JS -->
+     <script src="./JS/app.js"></script>
 </body>
 
 </html>
