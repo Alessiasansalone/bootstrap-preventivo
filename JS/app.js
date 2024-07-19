@@ -9,6 +9,7 @@ const formElement = document.getElementById('preventive-form')
 const nameElement = document.getElementById('input-name')
 const lastNameElement = document.getElementById('input-last-name')
 const emailElement = document.getElementById('input-email')
+const jobElement = document.getElementById('input-job')
 
 // Recupero dal DOM i div 
 const validationNameElement = document.getElementById('required-name')
@@ -55,6 +56,29 @@ formElement.addEventListener('submit', function (e) {
     }
     else {
         emailElement.classList.add('is-valid')
+    }
+
+    // SELECT
+    // Recuper il valore in input
+    const selectedJob = jobElement.value;
+    let prezzoOrario = 0
+
+    // SE non viene selezionato nessun valore
+    if (selectedJob === '') {
+        // Allora sarà un errore
+        jobElement.classList.add('is-invalid')
+    }
+    else if (selectedJob === '1') {
+        prezzoOrario = (20.50 * 10).toFixed(2)
+        console.log(prezzoOrario)
+    }
+    else if (selectedJob === '2') {
+        prezzoOrario = (15.30 * 10).toFixed(2)
+        console.log(prezzoOrario)
+    }
+    else if (selectedJob === '3') {
+        prezzoOrario = (33.60 * 10).toFixed(2)
+        console.log(prezzoOrario)
     }
 
 })
