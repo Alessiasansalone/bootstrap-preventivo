@@ -5,19 +5,27 @@ console.log('milestone')
 const formElement = document.getElementById('preventive-form')
 // console.log(formElement)
 
-// Recupero dal DOM i vari input
+// Recupero dal DOM
+// Nome
 const nameElement = document.getElementById('input-name')
-const lastNameElement = document.getElementById('input-last-name')
-const emailElement = document.getElementById('input-email')
-const jobElement = document.getElementById('input-job')
-const codeElement = document.getElementById('input-code')
-
-// Recupero dal DOM i div 
 const validationNameElement = document.getElementById('required-name')
+
+// Cognome
+const lastNameElement = document.getElementById('input-last-name')
 const validationLastNameElement = document.getElementById('required-last-name')
+
+// Email
+const emailElement = document.getElementById('input-email')
 const validationEmailElement = document.getElementById('required-email')
-const finalPriceElement = document.getElementById('final-price')
+
+// Select 
+const jobElement = document.getElementById('input-job')
+// Codice sconto
+const codeElement = document.getElementById('input-code')
 const invalidCodeElement = document.getElementById('invalid-code')
+
+// Prezzo finale 
+const finalPriceElement = document.getElementById('final-price')
 
 
 // aggiungiamo evento al form
@@ -91,28 +99,35 @@ formElement.addEventListener('submit', function (e) {
     // Dichiaro e assegno a una variabile il valore dell'input
     codeInput = codeElement.value;
 
-    // Calcolo sconto
+    // Dichiaro e assegno il valore zero a una variabile sconto
     let sconto = 0
 
-    if (!availableCodes.includes(codeInput)) {
+    // SE il campo è vuoto
+    if (codeInput === '') {
+        // Rimuovo se necessario la classe per inofrmare dell'errore
+        codeElement.classList.remove('is-invalid')
+    }
+    // ALTRIMENTI SE il codice sconto non fa parte della lista dei codici disponibiliil campo è vuoto
+    else if (!availableCodes.includes(codeInput)) {
+        // Aggiungo la classe is-invalid e informo l'utente dell'errore
         codeElement.classList.add('is-invalid')
         invalidCodeElement.innerHTML = 'Codice non valido.'
     }
-    else if (codeInput === '') {
-        codeElement.classList.remove('is-invalid')
-    }
+    // ALTRIMENTI SE il codice è corretto (opzione 1)
     else if (availableCodes.includes(codeInput) && selectedJob === '1') {
         codeElement.classList.add('is-valid')
         sconto = tariffa1 * 0.25
         newTariffa1 = (tariffa1 - sconto).toFixed(2)
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa1 + '</b>'
     }
+    // ALTRIMENTI SE il codice è corretto (opzione 2)
     else if (availableCodes.includes(codeInput) && selectedJob === '2') {
         codeElement.classList.add('is-valid')
         sconto = tariffa2 * 0.25
         newTariffa2 = (tariffa2 - sconto).toFixed(2)
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa2 + '</b>'
     }
+    // ALTRIMENTI SE il codice è corretto (opzione 3)
     else if (availableCodes.includes(codeInput) && selectedJob === '3') {
         codeElement.classList.add('is-valid')
         sconto = tariffa3 * 0.25
