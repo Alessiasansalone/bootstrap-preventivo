@@ -10,11 +10,14 @@ const nameElement = document.getElementById('input-name')
 const lastNameElement = document.getElementById('input-last-name')
 const emailElement = document.getElementById('input-email')
 const jobElement = document.getElementById('input-job')
+const codeElement = document.getElementById('input-code')
 
 // Recupero dal DOM i div 
 const validationNameElement = document.getElementById('required-name')
 const validationLastNameElement = document.getElementById('required-last-name')
 const validationEmailElement = document.getElementById('required-email')
+const finalPriceElement = document.getElementById('final-price')
+
 
 // aggiungiamo evento al form
 formElement.addEventListener('submit', function (e) {
@@ -70,29 +73,24 @@ formElement.addEventListener('submit', function (e) {
     }
     else if (selectedJob === '1') {
         prezzoOrario = (20.50 * 10).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
         console.log(prezzoOrario)
     }
     else if (selectedJob === '2') {
         prezzoOrario = (15.30 * 10).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
         console.log(prezzoOrario)
     }
     else if (selectedJob === '3') {
         prezzoOrario = (33.60 * 10).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
         console.log(prezzoOrario)
     }
 
+    // SCONTI
+    // Creo un array in cui inserisco i codici sconto disponibili
+    const availableCodes = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
+
+    // Dichiaro e assegno a una variabile il valore dell'input
+
 })
-
-
-
-/* // recupero il valore della email indicata nel form
-const emailElement = document.getElementById('inputEmail');
-console.log(emailElement)
-
-function validazioneEmail(emailElement) {
-
-    if (emailElement.value === '') {
-        console.log('il valore inserito non è valido')
-    }
-}
-    */

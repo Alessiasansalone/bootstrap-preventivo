@@ -70,25 +70,25 @@
                     <form class="g-3" id="preventive-form">
 
                         <div class="col-12 my-3">
-                            <label for="input-name" class="form-label">Nome</label>
+                            <label for="input-name" class="form-label">Nome *</label>
                             <input type="text" class="form-control" id="input-name">
                             <div class="pt-2 text-danger" id="required-name"></div>
                         </div>
 
                         <div class="col-12 my-3">
-                            <label for="input-last-name" class="form-label">Cognome</label>
+                            <label for="input-last-name" class="form-label">Cognome *</label>
                             <input type="text" class="form-control" id="input-last-name">
                             <div class="pt-2 text-danger" id="required-last-name"></div>
                         </div>
 
                         <div class="col-12 my-3">
-                            <label for="input-email" class="form-label">Email</label>
+                            <label for="input-email" class="form-label">Email *</label>
                             <input type="email" class="form-control" id="input-email" placeholder="email@adress.com">
                             <div class="pt-2 text-danger" id="required-email"></div>
                         </div>
 
                         <div class="col-12 my-3">
-                            <label for="input-job" class="form-label">Tipo di lavoro</label>
+                            <label for="input-job" class="form-label">Tipo di lavoro *</label>
                             <select id="input-job" class="form-select">
                                 <option selected value="">Scegli un'opzione...</option>
                                 <option value="1">Sviluppo backend</option>
@@ -108,8 +108,10 @@
 
                         <div class="col-12 my-3">
                             <label for="inputCode" class="form-label">Codice promozionale (opzionale)</label>
-                            <input type="text" class="form-control" id="inputCode">
+                            <input type="text" class="form-control" id="input-code">
                         </div>
+
+                        <div>* Campo obbligatorio</div>
 
                         <div class="col-12 my-3">
 
@@ -125,8 +127,10 @@
                         <div class="col-12 d-flex justify-content-evenly my-4">
                             <button type="submit" class="btn btn-primary" id="button">Calcola preventivo</button>
 
-                            <p><strong>Prezzo finale</strong></p>
-                            <p id="final-price"></p>
+                            <div class="d-flex flex-column align-items-center" style="font-size: 20px;">
+                                <strong>Prezzo finale</strong>
+                                <div id="final-price" style="font-size: 20px;"> -- </div>
+                            </div>                            
                         </div>
 
                     </form>
