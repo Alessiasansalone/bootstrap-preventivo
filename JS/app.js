@@ -17,6 +17,7 @@ const validationNameElement = document.getElementById('required-name')
 const validationLastNameElement = document.getElementById('required-last-name')
 const validationEmailElement = document.getElementById('required-email')
 const finalPriceElement = document.getElementById('final-price')
+const invalidCodeElement = document.getElementById('invalid-code')
 
 
 // aggiungiamo evento al form
@@ -64,7 +65,9 @@ formElement.addEventListener('submit', function (e) {
     // SELECT
     // Recuper il valore in input
     const selectedJob = jobElement.value;
-    let prezzoOrario = 0
+    let tariffa1 = (20.50 * 10).toFixed(2)
+    let tariffa2 = (15.30 * 10).toFixed(2)
+    let tariffa3 = (33.60 * 10).toFixed(2)
 
     // SE non viene selezionato nessun valore
     if (selectedJob === '') {
@@ -72,19 +75,13 @@ formElement.addEventListener('submit', function (e) {
         jobElement.classList.add('is-invalid')
     }
     else if (selectedJob === '1') {
-        prezzoOrario = (20.50 * 10).toFixed(2)
-        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
-        console.log(prezzoOrario)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa1 + '</b>'
     }
     else if (selectedJob === '2') {
-        prezzoOrario = (15.30 * 10).toFixed(2)
-        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
-        console.log(prezzoOrario)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa2 + '</b>'
     }
     else if (selectedJob === '3') {
-        prezzoOrario = (33.60 * 10).toFixed(2)
-        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + prezzoOrario + '</b>'
-        console.log(prezzoOrario)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa3 + '</b>'
     }
 
     // SCONTI
@@ -92,5 +89,34 @@ formElement.addEventListener('submit', function (e) {
     const availableCodes = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
 
     // Dichiaro e assegno a una variabile il valore dell'input
+    codeInput = codeElement.value;
 
+    // Calcolo sconto
+    let sconto = 0
+
+    if (!availableCodes.includes(codeInput)) {
+        codeElement.classList.add('is-invalid')
+        invalidCodeElement.innerHTML = 'Codice non valido.'
+    }
+    else if (codeInput === '') {
+        codeElement.classList.remove('is-invalid')
+    }
+    else if (availableCodes.includes(codeInput) && selectedJob === '1') {
+        codeElement.classList.add('is-valid')
+        sconto = tariffa1 * 0.25
+        newTariffa1 = (tariffa1 - sconto).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa1 + '</b>'
+    }
+    else if (availableCodes.includes(codeInput) && selectedJob === '2') {
+        codeElement.classList.add('is-valid')
+        sconto = tariffa2 * 0.25
+        newTariffa2 = (tariffa2 - sconto).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa2 + '</b>'
+    }
+    else if (availableCodes.includes(codeInput) && selectedJob === '3') {
+        codeElement.classList.add('is-valid')
+        sconto = tariffa3 * 0.25
+        newTariffa3 = (tariffa3 - sconto).toFixed(2)
+        finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa3 + '</b>'
+    }
 })
