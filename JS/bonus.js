@@ -1,11 +1,12 @@
 // Prova funzionamento
-console.log('milestone')
+console.log('bonus')
 
-// Recupero form dal DOM
+// Recupero dal DOM
+
+// Form 
 const formElement = document.getElementById('preventive-form')
 // console.log(formElement)
 
-// Recupero dal DOM
 // Nome
 const nameElement = document.getElementById('input-name')
 const validationNameElement = document.getElementById('required-name')
@@ -19,21 +20,37 @@ const emailElement = document.getElementById('input-email')
 const validationEmailElement = document.getElementById('required-email')
 
 // Select 
-const jobElement = document.getElementById('input-job')
+let jobElement = document.getElementById('input-job');
 // Codice sconto
 const codeElement = document.getElementById('input-code')
 const invalidCodeElement = document.getElementById('invalid-code')
 
+// Button
+const buttonElement = document.getElementById('button')
+
 // Prezzo finale 
 const finalPriceElement = document.getElementById('final-price')
 
+// Mailestone con bonus
 
-// aggiungiamo evento al form
+// ARRAY
+
+// Creo un array con i valori da immettere nella select
+const jobs = ['Scegli un\'opzione...', 'Sviluppo backend', 'Sviluppo frontend', 'Analisi progettuale']
+
+// Ciclo l'array
+jobs.forEach(function (element, i) {
+    // Per ogni elemento dell'array creo una option, ognuna col suo valore
+    jobElement.innerHTML = jobElement.innerHTML + '<option value = ' + i + '>' + element + '</option>'
+})
+
+// FORM
+
+// Aggiungiamo evento al form
 formElement.addEventListener('submit', function (e) {
 
-    // preveniamo il comportamento di default
+    // Preveniamo il comportamento di default
     e.preventDefault()
-    // console.log('submit', e)
 
     // CONTROLLO CAMPI VUOTI
 
@@ -71,24 +88,33 @@ formElement.addEventListener('submit', function (e) {
     }
 
     // SELECT
-    // Recuper il valore in input
-    const selectedJob = jobElement.value;
+    // Dichiaro e assegno il valore di jobElement ad una variabile
+    let currentJob = jobElement.value
+
+    // Dichiaro e assegno alle variabili tariffe il valore corrispondente
     let tariffa1 = (20.50 * 10).toFixed(2)
     let tariffa2 = (15.30 * 10).toFixed(2)
     let tariffa3 = (33.60 * 10).toFixed(2)
 
-    // SE non viene selezionato nessun valore
-    if (selectedJob === '') {
-        // Allora sarà un errore
+    // SE il valore è 0
+    if (currentJob === '0') {
+        // Allora il campo sarà vuoto [ERRORE]
         jobElement.classList.add('is-invalid')
+
     }
-    else if (selectedJob === '1') {
+    // ALTRIMENTI SE il valore è 1
+    else if (currentJob === '1') {
+        // Il prezzo finale sarà la tariffa senza sconti
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa1 + '</b>'
     }
-    else if (selectedJob === '2') {
+    // ALTRIMENTI SE il valore è 2
+    else if (currentJob === '2') {
+        // Il prezzo finale sarà la tariffa senza sconti
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa2 + '</b>'
     }
-    else if (selectedJob === '3') {
+    // ALTRIMENTI SE il valore è 3
+    else if (currentJob === '3') {
+        // Il prezzo finale sarà la tariffa senza sconti
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa3 + '</b>'
     }
 
@@ -114,24 +140,25 @@ formElement.addEventListener('submit', function (e) {
         invalidCodeElement.innerHTML = 'Codice non valido.'
     }
     // ALTRIMENTI SE il codice è corretto (opzione 1)
-    else if (availableCodes.includes(codeInput) && selectedJob === '1') {
+    else if (availableCodes.includes(codeInput) && currentJob === '1') {
         codeElement.classList.add('is-valid')
         sconto = tariffa1 * 0.25
         newTariffa1 = (tariffa1 - sconto).toFixed(2)
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa1 + '</b>'
     }
     // ALTRIMENTI SE il codice è corretto (opzione 2)
-    else if (availableCodes.includes(codeInput) && selectedJob === '2') {
+    else if (availableCodes.includes(codeInput) && currentJob === '2') {
         codeElement.classList.add('is-valid')
         sconto = tariffa2 * 0.25
         newTariffa2 = (tariffa2 - sconto).toFixed(2)
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa2 + '</b>'
     }
     // ALTRIMENTI SE il codice è corretto (opzione 3)
-    else if (availableCodes.includes(codeInput) && selectedJob === '3') {
+    else if (availableCodes.includes(codeInput) && currentJob === '3') {
         codeElement.classList.add('is-valid')
         sconto = tariffa3 * 0.25
         newTariffa3 = (tariffa3 - sconto).toFixed(2)
         finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa3 + '</b>'
     }
 })
+
