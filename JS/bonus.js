@@ -1,5 +1,5 @@
 // Prova funzionamento
-console.log('bonus')
+// console.log('bonus')
 
 // Recupero dal DOM
 
@@ -45,8 +45,7 @@ jobs.forEach(function (element, i) {
 })
 
 // FORM
-
-// Aggiungiamo evento al form
+// Ascoltiamo evento del form
 formElement.addEventListener('submit', function (e) {
 
     // Preveniamo il comportamento di default
@@ -91,6 +90,8 @@ formElement.addEventListener('submit', function (e) {
     // Dichiaro e assegno il valore di jobElement ad una variabile
     let currentJob = jobElement.value
 
+    console.log(currentJob)
+
     // Dichiaro e assegno alle variabili tariffe il valore corrispondente
     let tariffa1 = (20.50 * 10).toFixed(2)
     let tariffa2 = (15.30 * 10).toFixed(2)
@@ -100,7 +101,6 @@ formElement.addEventListener('submit', function (e) {
     if (currentJob === '0') {
         // Allora il campo sarà vuoto [ERRORE]
         jobElement.classList.add('is-invalid')
-
     }
     // ALTRIMENTI SE il valore è 1
     else if (currentJob === '1') {
