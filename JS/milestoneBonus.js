@@ -125,14 +125,14 @@ jobs.forEach(function (element, i) {
         else if (currentJob === '2') {
             // allora il valore insrito è valido
             jobElement.classList.add('is-valid')
-            // Il prezzo finale sarà la tariffa base
+            // il prezzo finale sarà la tariffa base
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + frontendBasicRate + '</b>'
         }
         // ALTRIMENTI SE il valore è 3
         else if (currentJob === '3') {
             // allora il valore inserito è valido
             jobElement.classList.add('is-valid')
-            // Il prezzo finale sarà la tariffa base
+            // il prezzo finale sarà la tariffa base
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + analysesBasicRate + '</b>'
         }
 
@@ -151,46 +151,47 @@ jobs.forEach(function (element, i) {
         // Ciclo if per gestire le condizioni [Ricontrollato]
         // SE il campo è vuoto
         if (codeInput === '') {
-            // Rimuovo se necessario la classe per inofrmare dell'errore
+            // rimuovo se necessario la classe per inofrmare dell'errore
             codeElement.classList.remove('is-invalid')
         }
         // ALTRIMENTI SE il codice sconto non fa parte della lista dei codici disponibiliil campo è vuoto
         else if (!availableCodes.includes(codeInput)) {
-            // Aggiungo la classe is-invalid e informo l'utente dell'errore
+            // aggiungo il codice inserito non è valido
             codeElement.classList.add('is-invalid')
+            // scrivo il messaggio d'errore
             invalidCodeElement.innerHTML = 'Codice non valido.'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 1)
         else if (availableCodes.includes(codeInput) && currentJob === '1') {
-            // Allora il codice è valido
+            // allora il codice inserito è valido
             codeElement.classList.add('is-valid')
-            // Calcolo lo sconto
+            // calcolo lo sconto
             sconto = backendBasicRate * 0.25
-            // Calcolo la nuova tariffa
+            // calcolo la nuova tariffa
             let backendDiscount = (backendBasicRate - sconto).toFixed(2)
-            // Stampo in pagina la nuova tariffa
+            // il prezzo finale sarà scontato del 25% 
             finalPriceElement.innerHTML = '<div>\u20AC ' + '<b>' + backendDiscount + '</b> </div>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 2)
         else if (availableCodes.includes(codeInput) && currentJob === '2') {
-            // Allora il codice è valido
+            // allora il codice è valido
             codeElement.classList.add('is-valid')
-            // Calcolo lo sconto
+            // calcolo lo sconto
             sconto = frontendBasicRate * 0.25
-            // Calcolo la nuova tariffa
+            // calcolo la nuova tariffa
             let frontendDiscount = (frontendBasicRate - sconto).toFixed(2)
-            // Stampo in pagina la nuova tariffa
+            // il prezzo finale sarà scontato del 25% 
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + frontendDiscount + '</b>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 3)
         else if (availableCodes.includes(codeInput) && currentJob === '3') {
-            // Allora il codice è valido
+            // allora il codice è valido
             codeElement.classList.add('is-valid')
-            // Calcolo lo sconto
+            // calcolo lo sconto
             sconto = analysesBasicRate * 0.25
-            // Calcolo la nuova tariffa
+            // calcolo la nuova tariffa
             let analysesDiscount = (analysesBasicRate - sconto).toFixed(2)
-            // Stampo in pagina la nuova tariffa
+            // il prezzo finale sarà scontato del 25% 
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + analysesDiscount + '</b>'
         }
 
@@ -208,15 +209,16 @@ jobs.forEach(function (element, i) {
             // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
-        // ALTRIMENTI è corretto
+        // ALTRIMENTI
         else {
+            // è corretto
             nameElement.classList.add('is-valid')
         }
 
         // Cognome [Ricontrollato]
         // SE il campo è vuoto
         if (!lastNameElement.value) {
-            // allora il valore inserito non è valido e scrivo il messaggio d'errore
+            // allora il valore inserito non è valido
             lastNameElement.classList.add('is-invalid')
             // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
@@ -224,14 +226,16 @@ jobs.forEach(function (element, i) {
             // il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
+        // ALTRIMENTI 
         else {
+            // è corretto
             lastNameElement.classList.add('is-valid')
         }
 
         // Email [Ricontollato]
         // SE il campo è vuoto
         if (!emailElement.value) {
-            // allora il valore inserito non è valido e scrivo il messaggio d'errore
+            // allora il valore inserito non è valido
             emailElement.classList.add('is-invalid')
             // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
@@ -241,7 +245,7 @@ jobs.forEach(function (element, i) {
         }
         // ALTRIMENTI
         else {
-            // il valore è corretto
+            // è corretto
             emailElement.classList.add('is-valid')
         }
     })
