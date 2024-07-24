@@ -1,5 +1,5 @@
 // Prova funzionamento
-console.log('bonus?')
+// console.log('bonus')
 
 // Recupero dal DOM
 
@@ -38,31 +38,23 @@ const finalPriceElement = document.getElementById('final-price')
 // Creo un array di oggetti con i valori da immettere nella select e le relative proprietà
 const jobs = [
     {
-        name: 'Scegli un\'opzione...',
-        hourlyPrice: 'error',
-        workHours: 'error',
-        basicRate: 'error',
+        value: 0,
+        name: 'Scegli un\'opzione...'
     },
 
     {
+        value: 1,
         name: 'Sviluppo backend',
-        hourlyPrice: 20.50,
-        workHours: 10,
-        basicRate: (20.50 * 10).toFixed(2)
     },
 
     {
+        value: 2,
         name: 'Sviluppo frontend',
-        hourlyPrice: 15.30,
-        workHours: 10,
-        basicRate: (15.30 * 10).toFixed(2)
     },
 
     {
+        value: 3,
         name: 'Analisi progettuale',
-        hourlyPrice: 33.60,
-        workHours: 10,
-        basicRate: (33.60 * 10).toFixed(2)
     }
 ]
 // console.log(jobs)
@@ -74,9 +66,12 @@ jobs.forEach(function (element, i) {
     // Name
     const jobsName = jobs[i].name
     // console.log(jobsName)
+    // Value
+    const jobsValue = jobs[i].value
+    // console.log(jobsValue)
 
     // Per ogni elemento dell'array creo una option, ognuna col suo valore
-    jobElement.innerHTML = jobElement.innerHTML + '<option value = ' + i + '>' + jobsName + '</option>'
+    jobElement.innerHTML = jobElement.innerHTML + '<option>' + jobsName + '</option>'
 
     // FORM
     // Ascoltiamo evento del form
@@ -90,32 +85,38 @@ jobs.forEach(function (element, i) {
         let currentJob = jobElement.value
         // console.log(currentJob)
 
-        let tariffaBase = jobs[i].basicRate
-        console.log(tariffaBase)
+        // Dichiaro e assegno alle variabili tariffe il valore corrispondente
+        let tariffa1 = (20.50 * 10).toFixed(2)
+        let tariffa2 = (15.30 * 10).toFixed(2)
+        let tariffa3 = (33.60 * 10).toFixed(2)
 
         // SE il valore è 0
-        if (currentJob === '0') {
+        if (jobsValue === '0') {
             // Allora il campo sarà vuoto [ERRORE]
             jobElement.classList.add('is-invalid')
-
+            finalPriceElement.classList.add('text-danger')
+            finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         // ALTRIMENTI SE il valore è 1
-        else if (currentJob === '1') {
+        else if (jobsValue === 1) {
+            jobElement.classList.remove('is-invalid')
+            finalPriceElement.classList.remove('text-danger')
             // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '<div> \u20AC ' +  '<b>' + tariffaBase + '</b> </div>'
-
+            finalPriceElement.innerHTML = '<div> \u20AC ' + '<b>' + tariffa1 + '</b> </div>'
         }
         // ALTRIMENTI SE il valore è 2
-        else if (currentJob === '2') {
+        else if (jobsValue === 2) {
+            jobElement.classList.remove('is-invalid')
+            finalPriceElement.classList.remove('text-danger')
             // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + (tariffaBase).toFixed(2) + '</b>'
-
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa2 + '</b>'
         }
         // ALTRIMENTI SE il valore è 3
-        else if (currentJob === '3') {
+        else if (jobsValue === 3) {
+            jobElement.classList.remove('is-invalid')
+            finalPriceElement.classList.remove('text-danger')
             // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + (tariffaBase).toFixed(2) + '</b>'
-
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa3 + '</b>'
         }
 
         // SCONTI
@@ -140,38 +141,52 @@ jobs.forEach(function (element, i) {
             invalidCodeElement.innerHTML = 'Codice non valido.'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 1)
-        else if (availableCodes.includes(codeInput) && currentJob === '1') {
+        else if (availableCodes.includes(codeInput) && jobsValue === 1) {
+            codeElement.classList.remove('is-invalid')
+            finalPriceElement.classList.remove('text-danger')
+            // Allora il codice è valido
             codeElement.classList.add('is-valid')
+            // Calcolo lo sconto
             sconto = tariffa1 * 0.25
-            newTariffa1 = (tariffa1 - sconto).toFixed(2)
+            // Calcolo la nuova tariffa
+            let newTariffa1 = (tariffa1 - sconto).toFixed(2)
+            // Stampo in pagina la nuova tariffa
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa1 + '</b>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 2)
-        else if (availableCodes.includes(codeInput) && currentJob === '2') {
+        else if (availableCodes.includes(codeInput) && jobsValue === 2) {
+            // Allora il codice è valido
             codeElement.classList.add('is-valid')
+            // Calcolo lo sconto
             sconto = tariffa2 * 0.25
-            newTariffa2 = (tariffa2 - sconto).toFixed(2)
+            // Calcolo la nuova tariffa
+            let newTariffa2 = (tariffa2 - sconto).toFixed(2)
+            // Stampo in pagina la nuova tariffa
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa2 + '</b>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 3)
-        else if (availableCodes.includes(codeInput) && currentJob === '3') {
+        else if (availableCodes.includes(codeInput) && jobsValue === 3) {
+            // Allora il codice è valido
             codeElement.classList.add('is-valid')
+            // Calcolo lo sconto
             sconto = tariffa3 * 0.25
-            newTariffa3 = (tariffa3 - sconto).toFixed(2)
+            // Calcolo la nuova tariffa
+            let newTariffa3 = (tariffa3 - sconto).toFixed(2)
+            // Stampo in pagina la nuova tariffa
             finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa3 + '</b>'
         }
 
-
-
         // CONTROLLO CAMPI VUOTI
-
 
         // NOME 
         // SE il campo è vuoto
         if (!nameElement.value) {
             // allora il valore inserito non è valido e scrivo il messaggio d'errore
             nameElement.classList.add('is-invalid')
+            finalPriceElement.classList.add('text-danger')
             validationNameElement.innerHTML = 'Campo obbligatorio!'
+            // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
+            finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         else {
             nameElement.classList.add('is-valid')
@@ -182,7 +197,10 @@ jobs.forEach(function (element, i) {
         if (!lastNameElement.value) {
             // allora il valore inserito non è valido e scrivo il messaggio d'errore
             lastNameElement.classList.add('is-invalid')
+            finalPriceElement.classList.add('text-danger')
             validationLastNameElement.innerHTML = 'Campo obbligatorio!'
+            // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
+            finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         else {
             lastNameElement.classList.add('is-valid')
@@ -193,20 +211,14 @@ jobs.forEach(function (element, i) {
         if (!emailElement.value) {
             // allora il valore inserito non è valido e scrivo il messaggio d'errore
             emailElement.classList.add('is-invalid')
+            finalPriceElement.classList.add('text-danger')
             validationEmailElement.innerHTML = 'Campo obbligatorio!'
+            // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
+            finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         else {
             emailElement.classList.add('is-valid')
         }
-
-
-
     })
     // console.log(jobs)
 })
-
-
-/* APPUNTI PER DOPO
-const job = jobs[i]
-
-*/
