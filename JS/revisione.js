@@ -1,7 +1,7 @@
 // Prova funzionamento
 // console.log('bonus')
 
-// Recupero dal DOM
+// ------------------------------ RECUPERO DOM ------------------------------
 
 // Form 
 const formElement = document.getElementById('preventive-form')
@@ -33,7 +33,7 @@ const finalPriceElement = document.getElementById('final-price')
 
 // Mailestone con bonus
 
-// OGGETTO
+// ------------------------------ OBJECT FOR SELECT OPTIONS ------------------------------
 
 // Creo un array di oggetti con i valori da immettere nella select e le relative proprietà
 const jobs = [
@@ -45,81 +45,100 @@ const jobs = [
     {
         value: 1,
         name: 'Sviluppo backend',
+        hourlyPrice: 20.5,
+        workHours: 10
     },
 
     {
         value: 2,
         name: 'Sviluppo frontend',
+        hourlyPrice: 15.3,
+        workHours: 10
     },
 
     {
         value: 3,
         name: 'Analisi progettuale',
+        hourlyPrice: 33.6,
+        workHours: 10
     }
 ]
-// console.log(jobs)
-
 
 // Ciclo l'array di oggetti
 jobs.forEach(function (element, i) {
 
-    // Name
+    // ------------------------------ VALUE VARIABLES' OBJECT ------------------------------
+
+    // Nome
     const jobsName = jobs[i].name
-    // console.log(jobsName)
-    // Value
-    const jobsValue = jobs[i].value
-    // console.log(jobsValue)
+
+    // Prezzi orari singoli
+    const backendPrice = jobs[1].hourlyPrice
+    const frontendPrice = jobs[2].hourlyPrice
+    const analysesPrice = jobs[3].hourlyPrice
+
+    // Ore di lavoro singole
+    const backendHours = jobs[1].workHours
+    const frontendHours = jobs[2].workHours
+    const analysesHours = jobs[3].workHours
+
+    // ------------------------------ RATE CALCULATION ------------------------------
+
+    // Calcolo le tariffe base
+    const backendBasicRate = (backendPrice * backendHours).toFixed(2)
+    const frontendBasicRate = (frontendPrice * frontendHours).toFixed(2)
+    const analysesBasicRate = (analysesPrice * analysesHours).toFixed(2)
 
     // Per ogni elemento dell'array creo una option, ognuna col suo valore
-    jobElement.innerHTML = jobElement.innerHTML + '<option>' + jobsName + '</option>'
+    jobElement.innerHTML = jobElement.innerHTML + '<option value= "' + i + '">' + jobsName + '</option>'
 
-    // FORM
+    // ------------------------------ FORM ------------------------------
+
     // Ascoltiamo evento del form
     formElement.addEventListener('submit', function (e) {
 
         // Preveniamo il comportamento di default
         e.preventDefault()
 
-        // SELECT
+        // ------------------------------ FORM-SELECT ------------------------------
+
         // Dichiaro e assegno il valore di jobElement ad una variabile
         let currentJob = jobElement.value
-        // console.log(currentJob)
 
-        // Dichiaro e assegno alle variabili tariffe il valore corrispondente
-        let tariffa1 = (20.50 * 10).toFixed(2)
-        let tariffa2 = (15.30 * 10).toFixed(2)
-        let tariffa3 = (33.60 * 10).toFixed(2)
-
+        // Ciclo if per gestire le condizioni [Ricontrollato]
         // SE il valore è 0
-        if (jobsValue === '0') {
-            // Allora il campo sarà vuoto [ERRORE]
+        if (currentJob === '0') {
+            // allora il valore inserito non è valido
             jobElement.classList.add('is-invalid')
+            // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         // ALTRIMENTI SE il valore è 1
-        else if (jobsValue === 1) {
-            jobElement.classList.remove('is-invalid')
-            finalPriceElement.classList.remove('text-danger')
-            // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '<div> \u20AC ' + '<b>' + tariffa1 + '</b> </div>'
+        else if (currentJob === '1') {
+            // allora il valore inserito è valido
+            jobElement.classList.add('is-valid')
+            // il prezzo finale sarà la tariffa base
+            finalPriceElement.innerHTML = '<div> \u20AC ' + '<b>' + backendBasicRate + '</b> </div>'
         }
         // ALTRIMENTI SE il valore è 2
-        else if (jobsValue === 2) {
-            jobElement.classList.remove('is-invalid')
-            finalPriceElement.classList.remove('text-danger')
-            // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa2 + '</b>'
+        else if (currentJob === '2') {
+            // allora il valore insrito è valido
+            jobElement.classList.add('is-valid')
+            // Il prezzo finale sarà la tariffa base
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + frontendBasicRate + '</b>'
         }
         // ALTRIMENTI SE il valore è 3
-        else if (jobsValue === 3) {
-            jobElement.classList.remove('is-invalid')
-            finalPriceElement.classList.remove('text-danger')
-            // Il prezzo finale sarà la tariffa senza sconti
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + tariffa3 + '</b>'
+        else if (currentJob === '3') {
+            // allora il valore inserito è valido
+            jobElement.classList.add('is-valid')
+            // Il prezzo finale sarà la tariffa base
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + analysesBasicRate + '</b>'
         }
 
-        // SCONTI
+        // ------------------------------ DISCOUNT-SELECT ------------------------------
+        // --------------------------- SEZIONE RICONTROLLATA ---------------------------
+
         // Creo un array in cui inserisco i codici sconto disponibili
         const availableCodes = ['YHDNU32', 'JANJC63', 'PWKCN25', 'SJDPO96', 'POCIE24']
 
@@ -129,6 +148,7 @@ jobs.forEach(function (element, i) {
         // Dichiaro e assegno il valore zero a una variabile sconto
         let sconto = 0
 
+        // Ciclo if per gestire le condizioni [Ricontrollato]
         // SE il campo è vuoto
         if (codeInput === '') {
             // Rimuovo se necessario la classe per inofrmare dell'errore
@@ -141,84 +161,88 @@ jobs.forEach(function (element, i) {
             invalidCodeElement.innerHTML = 'Codice non valido.'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 1)
-        else if (availableCodes.includes(codeInput) && jobsValue === 1) {
-            codeElement.classList.remove('is-invalid')
-            finalPriceElement.classList.remove('text-danger')
+        else if (availableCodes.includes(codeInput) && currentJob === '1') {
             // Allora il codice è valido
             codeElement.classList.add('is-valid')
             // Calcolo lo sconto
-            sconto = tariffa1 * 0.25
+            sconto = backendBasicRate * 0.25
             // Calcolo la nuova tariffa
-            let newTariffa1 = (tariffa1 - sconto).toFixed(2)
+            let backendDiscount = (backendBasicRate - sconto).toFixed(2)
             // Stampo in pagina la nuova tariffa
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa1 + '</b>'
+            finalPriceElement.innerHTML = '<div>\u20AC ' + '<b>' + backendDiscount + '</b> </div>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 2)
-        else if (availableCodes.includes(codeInput) && jobsValue === 2) {
+        else if (availableCodes.includes(codeInput) && currentJob === '2') {
             // Allora il codice è valido
             codeElement.classList.add('is-valid')
             // Calcolo lo sconto
-            sconto = tariffa2 * 0.25
+            sconto = frontendBasicRate * 0.25
             // Calcolo la nuova tariffa
-            let newTariffa2 = (tariffa2 - sconto).toFixed(2)
+            let frontendDiscount = (frontendBasicRate - sconto).toFixed(2)
             // Stampo in pagina la nuova tariffa
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa2 + '</b>'
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + frontendDiscount + '</b>'
         }
         // ALTRIMENTI SE il codice è corretto (opzione 3)
-        else if (availableCodes.includes(codeInput) && jobsValue === 3) {
+        else if (availableCodes.includes(codeInput) && currentJob === '3') {
             // Allora il codice è valido
             codeElement.classList.add('is-valid')
             // Calcolo lo sconto
-            sconto = tariffa3 * 0.25
+            sconto = analysesBasicRate * 0.25
             // Calcolo la nuova tariffa
-            let newTariffa3 = (tariffa3 - sconto).toFixed(2)
+            let analysesDiscount = (analysesBasicRate - sconto).toFixed(2)
             // Stampo in pagina la nuova tariffa
-            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + newTariffa3 + '</b>'
+            finalPriceElement.innerHTML = '\u20AC ' + '<b>' + analysesDiscount + '</b>'
         }
 
-        // CONTROLLO CAMPI VUOTI
+        // --------------------------- CONTROLLO CAMPI VUOTI ---------------------------
+        // --------------------------- SEZIONE RICONTROLLATA ---------------------------
 
-        // NOME 
+        // Nome [Ricontrollato]
         // SE il campo è vuoto
         if (!nameElement.value) {
-            // allora il valore inserito non è valido e scrivo il messaggio d'errore
+            // allora il valore inserito non è valido
             nameElement.classList.add('is-invalid')
+            // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
             validationNameElement.innerHTML = 'Campo obbligatorio!'
             // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
+        // ALTRIMENTI è corretto
         else {
             nameElement.classList.add('is-valid')
         }
 
-        // COGNOME
+        // Cognome [Ricontrollato]
         // SE il campo è vuoto
         if (!lastNameElement.value) {
             // allora il valore inserito non è valido e scrivo il messaggio d'errore
             lastNameElement.classList.add('is-invalid')
+            // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
             validationLastNameElement.innerHTML = 'Campo obbligatorio!'
-            // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
+            // il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
         else {
             lastNameElement.classList.add('is-valid')
         }
 
-        // EMAIL
+        // Email [Ricontollato]
         // SE il campo è vuoto
         if (!emailElement.value) {
             // allora il valore inserito non è valido e scrivo il messaggio d'errore
             emailElement.classList.add('is-invalid')
+            // scrivo il messaggio d'errore in rosso
             finalPriceElement.classList.add('text-danger')
             validationEmailElement.innerHTML = 'Campo obbligatorio!'
-            // Il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
+            // il prezzo finale non verrà calcolato e verrà visualizzato un messaggio d'errore
             finalPriceElement.innerHTML = '<b> Ehi, manca qualcosa! Ricontrolla il modulo </b>'
         }
+        // ALTRIMENTI
         else {
+            // il valore è corretto
             emailElement.classList.add('is-valid')
         }
     })
-    // console.log(jobs)
 })
