@@ -25,9 +25,6 @@ let jobElement = document.getElementById('input-job');
 const codeElement = document.getElementById('input-code')
 const invalidCodeElement = document.getElementById('invalid-code')
 
-// Button
-const buttonElement = document.getElementById('button')
-
 // Prezzo finale 
 const finalPriceElement = document.getElementById('final-price')
 
@@ -38,26 +35,22 @@ const finalPriceElement = document.getElementById('final-price')
 // Creo un array di oggetti con i valori da immettere nella select e le relative proprietà
 const jobs = [
     {
-        value: 0,
         name: 'Scegli un\'opzione...'
     },
 
     {
-        value: 1,
         name: 'Sviluppo backend',
         hourlyPrice: 20.5,
         workHours: 10
     },
 
     {
-        value: 2,
         name: 'Sviluppo frontend',
         hourlyPrice: 15.3,
         workHours: 10
     },
 
     {
-        value: 3,
         name: 'Analisi progettuale',
         hourlyPrice: 33.6,
         workHours: 10
@@ -93,6 +86,7 @@ jobs.forEach(function (element, i) {
     jobElement.innerHTML = jobElement.innerHTML + '<option value= "' + i + '">' + jobsName + '</option>'
 
     // ------------------------------ FORM ------------------------------
+    // --------------------------- SEZIONE RICONTROLLATA ---------------------------
 
     // Ascoltiamo evento del form
     formElement.addEventListener('submit', function (e) {
@@ -101,6 +95,7 @@ jobs.forEach(function (element, i) {
         e.preventDefault()
 
         // ------------------------------ FORM-SELECT ------------------------------
+        // --------------------------- SEZIONE RICONTROLLATA ---------------------------
 
         // Dichiaro e assegno il valore di jobElement ad una variabile
         let currentJob = jobElement.value
